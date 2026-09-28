@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPEC 第 4 節：未選中用弱文字 #8C8579，選中用主色薄荷 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/mint" android:state_checked="true" />
+    <item android:color="@color/text_muted" />
+</selector>

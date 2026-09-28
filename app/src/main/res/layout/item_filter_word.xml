@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  熟悉度篩選的一列。SPEC 第 5 節：checkbox 多選 + 每列顯示最近三次評分小點。
+
+  三個小點由左到右是「舊 → 新」，最右邊是最近一次。
+  這樣排才讀得出趨勢（紅紅綠＝在變好），倒過來會把趨勢讀反。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/touch_min"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/spacing_s"
+    android:paddingTop="@dimen/spacing_s"
+    android:paddingEnd="@dimen/spacing_m"
+    android:paddingBottom="@dimen/spacing_s">
+
+    <!--
+      duplicateParentState + 不可獨立點擊：整列都是觸控目標。
+      只有 20dp 的方框可按，在手機上會一直按空。
+    -->
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/check"
+        android:layout_width="@dimen/touch_min"
+        android:layout_height="@dimen/touch_min"
+        android:clickable="false"
+        android:focusable="false" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/headword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Eanki.Headword"
+            tools:text="acquisition" />
+
+        <TextView
+            android:id="@+id/translation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.Eanki.Caption"
+            tools:text="n. 獲得, 取得, 收購" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_s"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/dot3"
+            android:layout_width="@dimen/grade_dot"
+            android:layout_height="@dimen/grade_dot"
+            android:background="@drawable/dot_grade" />
+
+        <View
+            android:id="@+id/dot2"
+            android:layout_width="@dimen/grade_dot"
+            android:layout_height="@dimen/grade_dot"
+            android:layout_marginStart="@dimen/spacing_xs"
+            android:background="@drawable/dot_grade" />
+
+        <View
+            android:id="@+id/dot1"
+            android:layout_width="@dimen/grade_dot"
+            android:layout_height="@dimen/grade_dot"
+            android:layout_marginStart="@dimen/spacing_xs"
+            android:background="@drawable/dot_grade" />
+
+    </LinearLayout>
+
+</LinearLayout>

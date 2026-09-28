@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  寬度 >= 360dp（一般手機）：留白放回 24dp、字級放回標準。
+  比 360dp 更窄的（Fold 5 外螢幕約 344dp）會落到 values/dimens.xml 的 16dp 版本。
+  SPEC 第 7 節：用斷點，不要判斷機型。
+-->
+<resources>
+    <dimen name="gutter">24dp</dimen>
+
+    <dimen name="text_display">34sp</dimen>
+    <dimen name="text_headword">24sp</dimen>
+    <dimen name="text_body">16sp</dimen>
+    <dimen name="text_label">14sp</dimen>
+    <dimen name="text_caption">13sp</dimen>
+
+    <dimen name="heat_cell">40dp</dimen>
+    <dimen name="bottom_nav_height">76dp</dimen>
+    <dimen name="today_big_number">64sp</dimen>
+
+    <!-- 相機鍵浮在導覽列上方，不可壓到第四個分頁 -->
+    <dimen name="fab_bottom_margin">92dp</dimen>
+
+    <!-- 單字本的「手動輸入」要讓開全域相機鍵，否則兩顆會疊在一起 -->
+    <dimen name="wordlist_fab_bottom">164dp</dimen>
+</resources>

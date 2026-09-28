@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  沒有 INTERNET 權限。SPEC 第 2 節：全程離線，不呼叫任何雲端 API。
+  唯一的權限是通知，Android 13 起發通知需要使用者授權。
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="false" />
+
+    <application
+        android:name=".EankiApplication"
+        android:allowBackup="true"
+        android:icon="@android:drawable/ic_menu_search"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Eanki">
+
+        <!--
+          SPEC 第 7 節第 1 點：resizeableActivity 必須為 true，
+          且不可鎖 screenOrientation —— 否則 Fold 5 內螢幕會被信箱框住、兩側全黑。
+        -->
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true"
+            android:resizeableActivity="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.scan.ScanActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:resizeableActivity="true" />
+
+        <activity
+            android:name=".ui.review.ReviewActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:resizeableActivity="true" />
+
+        <activity
+            android:name=".ui.importer.ImportActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:resizeableActivity="true" />
+
+        <activity
+            android:name=".ui.familiarity.FamiliarityFilterActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:resizeableActivity="true" />
+
+        <activity
+            android:name=".ui.practice.ExtraPracticeActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:resizeableActivity="true" />
+
+        <activity
+            android:name=".ui.addword.AddWordActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:resizeableActivity="true" />
+
+    </application>
+
+</manifest>

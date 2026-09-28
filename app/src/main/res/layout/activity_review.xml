@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ground"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:id="@+id/reviewing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/gutter"
+        android:paddingEnd="@dimen/gutter">
+
+        <!-- 頂列：進度條 + 7/23 + 方向切換鍵（SPEC 第 5 節「複習正面」） -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/spacing_m"
+            android:paddingBottom="@dimen/spacing_m">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="6dp"
+                android:layout_weight="1"
+                android:max="100"
+                android:progressTint="@color/mint"
+                android:progressBackgroundTint="@color/border"
+                tools:progress="30" />
+
+            <TextView
+                android:id="@+id/progressText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_m"
+                android:textAppearance="@style/TextAppearance.Eanki.Label"
+                tools:text="7 / 23" />
+
+            <ImageButton
+                android:id="@+id/btnDirection"
+                android:layout_width="@dimen/touch_min"
+                android:layout_height="@dimen/touch_min"
+                android:layout_marginStart="@dimen/spacing_s"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/review_toggle_direction"
+                android:src="@drawable/ic_swap" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/directionLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingBottom="@dimen/spacing_s"
+            android:textAppearance="@style/TextAppearance.Eanki.Caption"
+            tools:text="英 → 中" />
+
+        <!-- 卡片：點擊翻面 -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            style="@style/Widget.Eanki.Card"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="@dimen/radius_l">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/spacing_l">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/spacing_xl" />
+
+                    <!-- 正面：大字單字 -->
+                    <TextView
+                        android:id="@+id/headwordLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.Eanki.Display"
+                        android:textSize="@dimen/text_card_headword"
+                        tools:text="vocabulary" />
+
+                    <TextView
+                        android:id="@+id/phonetic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_s"
+                        android:textAppearance="@style/TextAppearance.Eanki.Phonetic"
+                        tools:text="/və'kæbjuləri/" />
+
+                    <!-- 大發音鍵（SPEC 第 5 節「複習正面」） -->
+                    <ImageButton
+                        android:id="@+id/btnSpeak"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="@dimen/spacing_l"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/action_speak"
+                        android:padding="16dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_volume" />
+
+                    <!-- 背面：釋義 -->
+                    <View
+                        android:id="@+id/backDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/spacing_l"
+                        android:background="@color/border"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/translation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_l"
+                        android:lineSpacingMultiplier="1.35"
+                        android:textAppearance="@style/TextAppearance.Eanki.Body"
+                        android:visibility="gone"
+                        tools:text="n. 詞彙, 詞彙表, 字彙"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/posTag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_s"
+                        android:textAppearance="@style/TextAppearance.Eanki.Caption"
+                        android:visibility="gone"
+                        tools:text="n:100 · cet4 cet6 ky toefl ielts"
+                        tools:visibility="visible" />
+
+                    <!--
+                      例句中英對照（SPEC 第 5 節「複習背面」）。
+                      使用者自己的優先，沒有才用字典的 Tatoeba 備援，
+                      來源不同會在下面那行講清楚。
+                    -->
+                    <LinearLayout
+                        android:id="@+id/examples"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_m"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/exampleSource"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textAppearance="@style/TextAppearance.Eanki.Caption"
+                        android:textColor="@color/text_muted"
+                        android:visibility="gone"
+                        tools:text="例句來自 Tatoeba 語料庫"
+                        tools:visibility="visible" />
+
+                    <!--
+                      來源照片 chip（SPEC 第 5 節「複習背面」）。
+                      預設收著：複習時要先想起意思，照片是想不起來時的線索，
+                      一開始就攤開會直接洩漏答案的情境。
+                    -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSourcePhoto"
+                        style="@style/Widget.Eanki.Chip.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_m"
+                        android:text="@string/review_source_photo"
+                        android:visibility="gone"
+                        app:icon="@drawable/ic_camera"
+                        app:iconSize="16dp"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/sourcePhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_s"
+                        android:adjustViewBounds="true"
+                        android:background="@color/surface2"
+                        android:contentDescription="@string/review_source_photo"
+                        android:maxHeight="@dimen/source_photo_max_height"
+                        android:scaleType="fitCenter"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/spacing_xl" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 正面的「顯示答案」 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnShowAnswer"
+            style="@style/Widget.Eanki.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_m"
+            android:layout_marginBottom="@dimen/spacing_l"
+            android:text="@string/review_show_answer" />
+
+        <!-- 背面的四顆階梯評分鍵。實體在 view_grade_row.xml，與加強複習共用。 -->
+        <include
+            android:id="@+id/gradeRow"
+            layout="@layout/view_grade_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_m"
+            android:layout_marginBottom="@dimen/spacing_l"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <!-- 複習完成（SPEC 第 5 節空狀態的語氣，但講的是「做完了」） -->
+    <LinearLayout
+        android:id="@+id/finished"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/gutter"
+        android:paddingEnd="@dimen/gutter"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_check" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_m"
+            android:text="@string/review_done_title"
+            android:textAppearance="@style/TextAppearance.Eanki.Headword" />
+
+        <TextView
+            android:id="@+id/finishedSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_s"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.Eanki.Label"
+            tools:text="今天複習了 23 個字" />
+
+        <TextView
+            android:id="@+id/deferredNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_s"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.Eanki.Caption"
+            android:visibility="gone"
+            tools:text="還有 12 個字順延到明天"
+            tools:visibility="visible" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBackToList"
+            style="@style/Widget.Eanki.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:text="@string/review_back_to_list" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

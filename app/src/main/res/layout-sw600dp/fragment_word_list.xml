@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  >= 600dp 的展開版（Fold 5 內螢幕約 690dp、平板）。
+
+  SPEC 第 7 節的完整展開版是「左側導覽軌 + 清單／詳情雙欄」，
+  但導覽軌要有四個分頁才成立、詳情欄要有單字詳情頁才成立，兩者都在 Phase 2 之後。
+  Phase 1 先做最低限度的正確事：把內容收在 560dp 內置中，
+  避免一列單字橫跨 690dp。版面 id 與手機版完全一致，Activity 不需要分支。
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ground"
+>
+
+    <LinearLayout
+        android:layout_width="@dimen/content_max_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/gutter"
+            android:paddingTop="@dimen/spacing_xl"
+            android:paddingEnd="@dimen/gutter"
+            android:text="@string/wordlist_title"
+            android:textAppearance="@style/TextAppearance.Eanki.Display" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnImport"
+            style="@style/Widget.Eanki.Button.Outlined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/gutter"
+            android:minWidth="0dp"
+            android:paddingStart="@dimen/spacing_m"
+            android:paddingEnd="@dimen/spacing_m"
+            android:text="@string/empty_import_csv"
+            android:textSize="@dimen/text_label" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/gutter"
+            android:paddingTop="@dimen/spacing_xs"
+            android:paddingEnd="@dimen/gutter"
+            android:paddingBottom="@dimen/spacing_s"
+            android:textAppearance="@style/TextAppearance.Eanki.Label"
+            tools:text="共 12 個單字" />
+
+        <!--
+          搜尋（SPEC 第 5 節單字本要件）。
+          比對單字與中文釋義兩邊，所以「跑」也找得到 run。
+          過濾在 SQL 做，不是把全部載進來再用 Java 篩 ——
+          第 9 節已經記著清單之後要換 Paging 3，那時候記憶體裡不會有完整清單。
+        -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchLayout"
+            style="@style/Widget.Eanki.TextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gutter"
+            android:layout_marginEnd="@dimen/gutter"
+            android:hint="@string/wordlist_search_hint"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_search"
+            app:startIconTint="@color/text_secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- 標籤 chip。沒有任何標籤時整列收掉，不留一顆孤零零的「全部」。 -->
+        <HorizontalScrollView
+            android:id="@+id/tagScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_s"
+            android:clipToPadding="false"
+            android:paddingStart="@dimen/gutter"
+            android:paddingEnd="@dimen/gutter"
+            android:scrollbars="none">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/tagChips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:selectionRequired="true"
+                app:singleLine="true"
+                app:singleSelection="true" />
+
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingStart="@dimen/gutter"
+            android:paddingEnd="@dimen/gutter"
+            android:paddingBottom="96dp"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/item_word" />
+
+        <!--
+          篩選沒結果 ≠ 單字本是空的。
+          空狀態會勸你去掃描或匯入，但這裡使用者有 1,464 個字，
+          只是這個關鍵字沒中，那段文案會很莫名其妙。
+        -->
+        <LinearLayout
+            android:id="@+id/noResults"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/gutter"
+            android:paddingEnd="@dimen/gutter"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/noResultsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Eanki.Label"
+                tools:text="找不到「xyz」" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnClearFilter"
+                style="@style/Widget.Eanki.Button.Outlined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_m"
+                android:text="@string/wordlist_clear_filter" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/emptyState"
+        android:layout_width="@dimen/content_max_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/gutter"
+        android:paddingEnd="@dimen/gutter"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:alpha="0.5"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_book" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_m"
+            android:text="@string/empty_title"
+            android:textAppearance="@style/TextAppearance.Eanki.Headword" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_s"
+            android:gravity="center"
+            android:text="@string/empty_body"
+            android:textAppearance="@style/TextAppearance.Eanki.Label" />
+
+        <!--
+          SPEC 第 5 節空狀態：掃描是主動作，手動輸入與匯入是次要。
+          第一原則是「加字不用打字」，空狀態更不該把打字擺在最前面。
+        -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEmptyScan"
+            style="@style/Widget.Eanki.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:text="@string/empty_scan_first"
+            app:icon="@drawable/ic_camera"
+            app:iconTint="@color/on_mint" />
+
+        <!-- 「離線字典已就緒」：第一次打開時讓人知道不必連網、不必下載 -->
+        <TextView
+            android:id="@+id/emptyDictReady"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_l"
+            android:drawablePadding="@dimen/spacing_xs"
+            android:gravity="center"
+            android:text="@string/empty_dict_ready"
+            android:textAppearance="@style/TextAppearance.Eanki.Caption"
+            android:textColor="@color/mint"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/spacing_xl"
+        android:layout_marginBottom="@dimen/wordlist_fab_bottom"
+        android:text="@string/wordlist_add"
+        android:textColor="@color/on_mint"
+        app:backgroundTint="@color/mint"
+        app:icon="@drawable/ic_add"
+        app:iconTint="@color/on_mint" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

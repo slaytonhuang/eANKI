@@ -1,0 +1,47 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.example.eanki.phase0'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.eanki.phase0"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "0.1"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    // ML Kit 會拉進 kotlin-stdlib-jdk7/jdk8:1.6.21，appcompat 會拉進 kotlin-stdlib:1.8.22。
+    // Kotlin 1.8 起 jdk7/jdk8 的內容已併回 kotlin-stdlib，兩邊同時存在就會
+    // 在 checkDebugDuplicateClasses 撞成 Duplicate class。把 jdk7/jdk8 拉到同版本即可，
+    // 1.8.22 的這兩個 artifact 只是空殼，轉而相依 kotlin-stdlib。
+    constraints {
+        implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22')
+        implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22')
+    }
+
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+
+    // Demo 1：ML Kit Text Recognition v2（bundled Latin model，完全離線、不需 API key）
+    implementation 'com.google.mlkit:text-recognition:16.0.1'
+}

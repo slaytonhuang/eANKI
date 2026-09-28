@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">eANKI</string>
+
+    <!-- 單字本 -->
+    <string name="wordlist_title">單字本</string>
+    <string name="wordlist_add">手動輸入</string>
+    <string name="due_not_started">尚未開始</string>
+    <string name="due_now">待複習</string>
+    <string name="due_later_today">今天稍後</string>
+    <string name="due_in_days">%1$d 天後</string>
+    <string name="wordlist_search_hint">搜尋單字或中文</string>
+    <string name="wordlist_tag_all">全部</string>
+    <string name="wordlist_count_filtered">篩選出 %1$d 個，共 %2$d 個</string>
+    <string name="wordlist_no_results">找不到「%1$s」</string>
+    <string name="wordlist_no_results_tag">這個標籤底下沒有字</string>
+    <string name="wordlist_clear_filter">清除篩選</string>
+    <string name="wordlist_count">共 %1$d 個單字</string>
+
+    <!-- 空狀態 -->
+    <string name="empty_title">單字本還是空的</string>
+    <string name="empty_body">拍一張課本或講義，點你想記的字就能加進來。也可以手動輸入，或匯入 CSV。</string>
+    <string name="empty_dict_ready">離線字典已就緒</string>
+    <string name="empty_dict_loading">離線字典載入中…</string>
+
+    <!-- 新增單字 -->
+    <string name="add_title">新增單字</string>
+    <string name="add_hint">英文單字</string>
+    <string name="add_lookup">查字典</string>
+    <string name="add_save">加入單字本</string>
+    <string name="add_not_found">字典查不到「%1$s」</string>
+    <string name="add_not_found_hint">仍然可以加入，音標與釋義留空，之後再補。</string>
+    <string name="add_empty_input">請先輸入單字</string>
+    <string name="add_saved">已加入「%1$s」</string>
+    <string name="add_duplicate">「%1$s」已經在單字本裡了</string>
+    <string name="add_failed">加入失敗</string>
+
+    <!-- 列表項 -->
+    <string name="action_speak">發音</string>
+    <string name="action_delete">刪除</string>
+    <string name="delete_confirm_title">刪除「%1$s」？</string>
+    <string name="delete_confirm_body">這個字的複習紀錄會一併刪除。</string>
+    <string name="delete_confirm_ok">刪除</string>
+    <string name="delete_cancel">取消</string>
+    <string name="deleted_undo">已刪除「%1$s」</string>
+    <string name="undo">復原</string>
+
+    <string name="no_translation">（無釋義）</string>
+    <string name="inflection_hint">%1$s 的變化形</string>
+
+    <!-- 複習 -->
+    <string name="review_title">複習</string>
+    <string name="review_start">開始複習</string>
+    <string name="review_show_answer">顯示答案</string>
+    <string name="review_toggle_direction">切換方向</string>
+    <string name="review_dir_en_zh">英 → 中</string>
+    <string name="review_dir_zh_en">中 → 英</string>
+    <string name="review_progress">%1$d / %2$d</string>
+    <string name="review_source_photo">來源照片</string>
+    <string name="review_source_photo_missing">來源照片已經不在了</string>
+    <string name="review_example_source_tatoeba">例句來自 Tatoeba 語料庫（字典備援，非你自己整理的）</string>
+    <string name="review_examples_later">例句與來源照片之後才會有</string>
+    <string name="review_done_title">今天的份量做完了</string>
+    <string name="review_done_summary">複習了 %1$d 個字</string>
+    <string name="review_done_nothing">今天沒有要複習的字</string>
+    <string name="review_deferred">還有 %1$d 個字順延到明天</string>
+    <string name="review_back_to_list">回單字本</string>
+    <string name="review_dir_locked">中 → 英的排程之後才接，目前仍照英 → 中計算</string>
+
+    <!-- 四顆評分鍵（SPEC 第 6.3 節） -->
+    <string name="grade_forgot">忘了</string>
+    <string name="grade_hard">有點難</string>
+    <string name="grade_good">記得</string>
+    <string name="grade_easy">太簡單</string>
+
+    <!-- 間隔顯示 -->
+    <string name="interval_minutes">%1$d 分鐘</string>
+    <string name="interval_hours">%1$d 小時</string>
+    <string name="interval_days">%1$d 天</string>
+    <string name="interval_months">%1$.1f 個月</string>
+
+    <!-- 單字本上的複習入口 -->
+    <string name="wordlist_due">今日待複習 %1$d · 可放行新字 %2$d</string>
+    <string name="wordlist_nothing_due">今天沒有要複習的字</string>
+
+    <!-- 每日提醒 -->
+    <string name="notif_channel_name">每日複習提醒</string>
+    <string name="notif_channel_desc">晚上提醒你今天還有單字要複習。沒有待複習的字時不會發通知。</string>
+    <string name="notif_title">今天的單字還沒複習</string>
+    <plurals name="notif_body">
+        <item quantity="other">有 %1$d 個字在等你</item>
+    </plurals>
+    <string name="notif_permission_rationale">開啟通知才能收到每日複習提醒</string>
+
+    <!-- 底部四分頁（SPEC 第 5 節） -->
+    <string name="tab_today">今日</string>
+    <string name="tab_words">單字本</string>
+    <string name="tab_familiarity">熟悉度</string>
+    <string name="tab_settings">設定</string>
+    <string name="action_scan">掃描</string>
+
+    <!-- 今日頁 -->
+    <string name="today_title">今日</string>
+    <string name="today_due_label">待複習</string>
+    <string name="today_new_label">今日可放行新字 %1$d</string>
+    <string name="today_heatmap_title">過去七天</string>
+    <string name="today_heatmap_empty">這七天還沒有複習紀錄</string>
+    <string name="today_recent_title">最近加入</string>
+    <string name="today_nothing_due">今天的份量做完了</string>
+    <string name="today_nothing_due_sub">明天再來</string>
+
+    <!-- 尚未實作的分頁 -->
+    <string name="coming_soon">即將推出</string>
+
+    <!-- 熟悉度（SPEC 第 5 節、第 6.5/6.6 節） -->
+    <string name="familiarity_graded">已評分 %1$d 個字</string>
+    <string name="familiarity_not_started">尚未開始</string>
+    <string name="familiarity_empty">還沒有任何字被評分過。先去複習幾輪，這裡就會出現分布。</string>
+    <string name="familiarity_struggling">不太熟的字 %1$d 個</string>
+    <string name="familiarity_struggling_note">忘了 + 有點難。加強複習只更新熟悉度，不影響原本的排程。</string>
+    <string name="familiarity_practice_all">全部</string>
+    <string name="familiarity_practice_20">只挑 20</string>
+    <!-- 熟悉度篩選（SPEC 第 5 節） -->
+    <string name="filter_title">挑要練的字</string>
+    <string name="filter_level_chip">%1$s %2$d</string>
+    <string name="filter_select_all">全選</string>
+    <string name="filter_clear">全部取消</string>
+    <string name="filter_selected">已選 %1$d 個</string>
+    <string name="filter_empty">這一級目前沒有字。</string>
+    <string name="sort_stale_first">最久沒複習</string>
+    <string name="sort_recently_added">最近加入</string>
+    <string name="sort_alphabetical">字母順序</string>
+
+    <!-- 加強複習（SPEC 第 6.6 節） -->
+    <string name="practice_start">開始加強複習</string>
+    <string name="practice_no_schedule">不影響原本的排程</string>
+    <string name="practice_banner">加強複習 · 這裡的評分只更新熟悉度，不影響原本的排程</string>
+    <string name="practice_done_title">練完了</string>
+    <string name="practice_done_summary">練了 %1$d 個字</string>
+    <string name="practice_done_note">熟悉度已更新，排程沒有變動。</string>
+    <string name="practice_done_back">回到熟悉度</string>
+    <string name="practice_nothing">目前沒有不太熟的字</string>
+    <!-- 設定（SPEC 第 5 節）-->
+    <string name="settings_section_volume">每日份量</string>
+    <string name="settings_new_per_day">新字上限</string>
+    <string name="settings_new_per_day_note">每天最多放行幾個新字進入複習流程。設成 0 就是先把手上的消化完。</string>
+    <string name="settings_reviews_per_day">複習上限</string>
+    <string name="settings_reviews_per_day_note">當天的總量天花板，含新字。超過的順延到明天，最久沒複習的優先。</string>
+    <string name="settings_volume_preview">以目前的設定，今天會有 %1$d 張卡</string>
+    <string name="settings_volume_preview_none">以目前的設定，今天沒有要複習的卡</string>
+
+    <string name="settings_section_reminder">提醒</string>
+    <string name="settings_reminder_enabled">每日提醒</string>
+    <string name="settings_reminder_enabled_note">到時間提醒你今天要複習幾個字</string>
+    <string name="settings_reminder_time">提醒時間</string>
+    <string name="settings_reminder_time_note">每天固定這個時間</string>
+    <string name="settings_skip_empty">沒有待複習就不提醒</string>
+    <string name="settings_skip_empty_note">連續的空通知會讓人乾脆關掉通知權限，之後真的有東西要複習時就提醒不到了</string>
+    <string name="settings_battery">電池最佳化</string>
+    <string name="settings_battery_note">系統的 Doze 會把背景工作往後推，提醒可能晚一兩個小時才到。設成「不最佳化」會準時得多。</string>
+    <string name="settings_notification_permission">通知權限</string>
+    <string name="settings_notification_permission_note">沒有權限的話提醒會被系統靜靜丟掉，看起來就像功能壞了</string>
+    <string name="settings_state_on">已開啟</string>
+    <string name="settings_state_off">未開啟</string>
+    <string name="settings_state_unrestricted">不受限制</string>
+    <string name="settings_state_restricted">會被延後</string>
+    <string name="settings_state_unknown">未知</string>
+
+    <string name="settings_section_speech">發音</string>
+    <string name="settings_speech_rate">語速</string>
+    <string name="settings_speech_preview">試聽</string>
+    <string name="settings_speech_sample">vocabulary</string>
+    <string name="settings_speech_not_ready">發音引擎還在啟動，等一下再試</string>
+    <string name="settings_auto_speak">翻卡自動發音</string>
+    <string name="settings_auto_speak_note">翻到背面時自動唸一次。預設關閉——在通勤或別人旁邊突然出聲不太好。</string>
+
+    <string name="settings_section_backup">資料備份</string>
+    <string name="settings_backup_note">備份含單字、音標、釋義、例句、標籤、熟悉度與複習排程，是完整的一份。重新匯入原始 CSV 救不回排程與熟悉度。</string>
+    <string name="settings_backup_export">匯出備份</string>
+    <string name="settings_backup_restore">從備份還原</string>
+    <string name="settings_backup_never">還沒有備份過</string>
+    <string name="settings_backup_last">上次備份：%1$s</string>
+    <string name="settings_backup_exporting">匯出中…</string>
+    <string name="settings_backup_exported">已匯出 %1$d 個單字（%2$s）</string>
+    <string name="settings_backup_export_failed">匯出失敗：%1$s</string>
+    <string name="settings_backup_skipped_images">有 %1$d 張來源照片太大，沒有放進備份</string>
+    <string name="settings_backup_bad_file">這不是有效的備份檔：%1$s</string>
+    <string name="settings_restore_title">要用這份備份取代現有資料嗎？</string>
+    <!--
+      這段會經過 HtmlCompat.fromHtml，所以換行要用 &lt;br/&gt; 而不是 \n ——
+      HTML 會把純換行當成空白，三段文字會黏成一整團。
+    -->
+    <string name="settings_restore_body">備份時間：%1$s&lt;br/&gt;&lt;br/&gt;內容：%2$d 個單字、%3$d 句例句、%4$d 筆複習排程、%5$d 筆複習紀錄&lt;br/&gt;&lt;br/&gt;目前的 %6$d 個單字會被&lt;b&gt;整批取代&lt;/b&gt;，備份之後新增的字會消失。這個動作無法復原。</string>
+    <string name="settings_restore_confirm">取代並還原</string>
+    <string name="settings_restore_cancel">取消</string>
+    <string name="settings_restoring">還原中…</string>
+    <string name="settings_restored">已還原 %1$d 個單字與 %2$d 筆複習排程</string>
+    <string name="settings_restore_failed">還原失敗：%1$s</string>
+
+    <string name="settings_section_dictionary">離線字典</string>
+    <string name="settings_dict_ready">已就緒</string>
+    <string name="settings_dict_missing">字典檔不可用</string>
+    <string name="settings_dict_detail">%1$,d 個詞條 · %2$,d 個詞形 · %3$,d 句例句 · %4$.1f MB</string>
+    <string name="settings_dict_note">字典內建在 App 裡，沒有下載更新——更新 App 就會一起更新。下面這個按鈕是給檔案損壞時修復用的，平常不需要按。</string>
+    <string name="settings_dict_rebuild">重建字典檔</string>
+    <string name="settings_dict_rebuilding">重建中…</string>
+    <string name="settings_dict_rebuilt">字典檔已重建</string>
+    <string name="settings_dict_rebuild_failed">重建失敗，請確認儲存空間是否足夠</string>
+
+    <string name="coming_soon_settings">新字上限、複習上限、提醒時間等設定會在 Phase 4 完成</string>
+    <string name="scan_hint_live">點畫面可對焦。框浮現代表對得到焦，按快門後才能點選。</string>
+    <string name="scan_hint_frozen">薄荷框＝字典查得到，點一下選取；磚紅框＝字典查不到</string>
+    <string name="scan_shutter">拍照取字</string>
+    <string name="scan_gallery">相簿</string>
+    <string name="empty_pick_photo">從相簿選圖</string>
+    <string name="scan_loading_photo">讀取相片中…</string>
+    <string name="scan_photo_failed">讀不到這張相片：%1$s</string>
+    <string name="scan_retake">重拍</string>
+    <string name="scan_add_none">選幾個字再加入</string>
+    <string name="scan_add_n">加入 %1$d 個單字</string>
+    <string name="scan_capturing">辨識中…</string>
+    <string name="scan_capture_failed">拍照失敗：%1$s</string>
+    <string name="scan_frozen_summary">辨識到 %1$d 個字，其中 %2$d 個字典查得到</string>
+    <string name="scan_added">已加入 %1$d 個單字</string>
+    <string name="scan_added_with_dup">已加入 %1$d 個，%2$d 個已經在單字本裡</string>
+    <string name="scan_added_none">沒有新的字被加入</string>
+    <string name="scan_nothing_recognized">這張沒有辨識到文字。先點畫面對焦，再按快門。</string>
+    <string name="scan_selected">已選 %1$d 個</string>
+    <string name="scan_not_found_toast">字典查不到「%1$s」，多半是辨識錯了</string>
+    <string name="scan_deselected">已取消「%1$s」</string>
+    <string name="scan_need_camera">需要相機權限</string>
+    <string name="scan_need_camera_sub">掃描取字要用到相機。App 不會上傳任何影像，辨識全部在裝置上完成。</string>
+    <string name="scan_grant">允許使用相機</string>
+    <string name="scan_camera_failed">相機啟動失敗：%1$s</string>
+    <string name="scan_close">關閉</string>
+
+    <!-- 空狀態（SPEC 第 5 節） -->
+    <string name="empty_scan_first">掃描第一個單字</string>
+    <string name="empty_import_csv">匯入 CSV</string>
+
+    <!-- CSV 匯入 -->
+    <string name="import_title">匯入 CSV</string>
+    <string name="import_body">欄位需含 headword，其餘 phonetic、meaning_zh、example_en、example_zh 有就讀、沒有就留空。\n\n這種來源的資料視為完整，不會再去查字典補全。已經在單字本裡的字會跳過。</string>
+    <string name="import_tag_hint">統一標籤（可留空）</string>
+    <string name="import_pick">選擇 CSV 檔案</string>
+    <string name="import_done">完成</string>
+    <string name="import_progress">匯入中… %1$d / %2$d</string>
+    <string name="import_reading">讀取檔案中…</string>
+    <string name="import_result_title">匯入完成</string>
+    <string name="import_result_unmapped">\n注意：檔案裡有無法還原的部首字元 %1$s\n這些字看起來正常，但搜尋會搜不到。</string>
+    <string name="import_result_simplified">\n注意：中文裡有簡體字 %1$s\n沒有自動轉換（轉繁要看上下文，轉錯會改掉意思），建議回頭修來源檔。</string>
+    <string name="import_result_body">新增 %1$d 個\n已存在跳過 %2$d 個</string>
+    <string name="import_result_examples">，其中 %1$d 個字帶例句</string>
+    <string name="import_result_tag">全部貼上標籤「%1$s」，目前這個標籤底下共 %2$d 個字</string>
+    <string name="import_failed_title">匯入失敗</string>
+    <string name="import_failed">匯入失敗：%1$s</string>
+    <string name="import_empty">這個檔案裡沒有可匯入的資料，請確認標題列有 headword 欄</string>
+</resources>

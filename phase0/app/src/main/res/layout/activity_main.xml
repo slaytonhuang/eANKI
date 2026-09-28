@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:text="Phase 0 可行性驗證。結果印在 Logcat，tag 過濾 PHASE0。" />
+
+    <Button
+        android:id="@+id/btnOcr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Demo 1 — ML Kit 辨識 assets/sample_text.jpg" />
+
+    <Button
+        android:id="@+id/btnTts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Demo 2 — TextToSpeech 念 apple" />
+
+    <Button
+        android:id="@+id/btnDict"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Demo 3 — ECDICT 查 apple" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="24dp">
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
+            android:typeface="monospace"
+            android:textSize="11sp"
+            android:text="—" />
+
+    </ScrollView>
+
+</LinearLayout>

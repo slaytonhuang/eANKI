@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SPEC 第 4 節的尺寸 token。
+
+  手機留白預設 24dp；外螢幕（<360dp）縮到 16dp —— 見 values-w360dp/dimens.xml，
+  那份是「寬度 >= 360dp」時才套用的 24dp，所以這裡的預設值要寫窄螢幕的 16dp。
+  Galaxy Z Fold 5 外螢幕估算約 344dp，會落在這份預設值。
+-->
+<resources>
+
+    <!-- 留白：預設為窄螢幕 -->
+    <dimen name="gutter">16dp</dimen>
+
+    <!-- 圓角 -->
+    <dimen name="radius_s">12dp</dimen>
+    <dimen name="radius_m">16dp</dimen>
+    <dimen name="radius_l">22dp</dimen>
+    <dimen name="radius_pill">999dp</dimen>
+
+    <!-- 觸控目標：SPEC 要求最小 48dp，任何情況不得低於 44dp -->
+    <dimen name="touch_min">48dp</dimen>
+
+    <!-- 字級：窄螢幕降一級 -->
+    <dimen name="text_display">30sp</dimen>
+    <dimen name="text_headword">22sp</dimen>
+    <dimen name="text_body">15sp</dimen>
+    <dimen name="text_label">13sp</dimen>
+    <dimen name="text_caption">12sp</dimen>
+
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_s">8dp</dimen>
+    <dimen name="spacing_m">16dp</dimen>
+    <dimen name="spacing_l">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+
+    <!-- 四顆階梯評分鍵：SPEC 第 6.3 節的高度 54/64/74/84 -->
+    <dimen name="grade_h1">54dp</dimen>
+    <dimen name="grade_h2">64dp</dimen>
+    <dimen name="grade_h3">74dp</dimen>
+    <dimen name="grade_h4">84dp</dimen>
+    <dimen name="grade_text_padding">10dp</dimen>
+
+    <!-- 複習卡上的大字單字 -->
+    <dimen name="text_card_headword">40sp</dimen>
+
+    <!-- 熱力圖格子。SPEC 第 7 節：外螢幕（<360dp）縮到 34 -->
+    <dimen name="heat_cell">34dp</dimen>
+    <!-- 底部導覽列高 76dp（窄螢幕 72dp），SPEC 第 4 節 -->
+    <dimen name="bottom_nav_height">72dp</dimen>
+    <dimen name="today_big_number">56sp</dimen>
+
+    <!-- 列表在寬螢幕不要無限拉寬，見 values-sw600dp -->
+    <dimen name="content_max_width">0dp</dimen>
+
+
+    <!-- 相機鍵浮在導覽列上方，不可壓到第四個分頁 -->
+    <dimen name="fab_bottom_margin">88dp</dimen>
+
+    <!-- 單字本的「手動輸入」要讓開全域相機鍵，否則兩顆會疊在一起 -->
+    <dimen name="wordlist_fab_bottom">160dp</dimen>
+
+    <!--
+      堆疊條四段之間的間隔。「記得」#6FB49D 與「太簡單」#7FBFA9 兩色很接近，
+      交界處看不出來。解法是加間隔而不是改色：SPEC 第 4 節的色票要全 App 一致，
+      為了單一畫面做變體，以後別的地方用到這四級顏色就對不上了。
+    -->
+    <dimen name="stack_bar_gap">2dp</dimen>
+
+    <!-- 篩選清單每列右側「最近三次評分」的小點 -->
+    <dimen name="grade_dot">8dp</dimen>
+
+    <!-- 來源照片攤開時的高度上限。裁切下來的通常很扁，但整頁裁的可能很高 -->
+    <dimen name="source_photo_max_height">240dp</dimen>
+</resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  導覽骨架。SPEC 第 5 節：底部四分頁 + 右下角浮動相機鍵（磚紅）。
+
+  四個分頁共用一個 Activity，內容用 Fragment 換。
+  這樣分頁切換不會重建 Activity，也讓摺疊時的狀態保存集中在各自的 ViewModel。
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ground"
+    android:fitsSystemWindows="true">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/bottom_nav_height" />
+
+    <!--
+      磚紅只給「需要你處理」的東西，SPEC 第 4 節點名相機鍵是其中之一。
+      錨在導覽列上方，不會蓋住最後一列內容。
+    -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/gutter"
+        android:layout_marginBottom="@dimen/fab_bottom_margin"
+        android:contentDescription="@string/action_scan"
+        app:backgroundTint="@color/brick"
+        app:srcCompat="@drawable/ic_camera"
+        app:tint="@color/on_brick" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_nav_height"
+        android:layout_gravity="bottom"
+        android:background="@color/nav_bar"
+        app:itemIconTint="@color/bottom_nav_item"
+        app:itemTextColor="@color/bottom_nav_item"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  主要動作鍵的底色。停用時必須看得出來 ——
+  寫死單色的話，disabled 的按鈕外觀跟可按的一模一樣，
+  使用者會一直戳「開始加強複習」卻沒反應。
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/surface2" android:state_enabled="false" />
+    <item android:color="@color/mint" />
+</selector>

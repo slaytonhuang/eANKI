@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SPEC 第 4 節：深色為唯一主題。所以這裡用 Material3 的 Dark 基底，
+  且 res/ 下不放 values-night/ —— 系統切淺色模式時 App 仍維持深色。
+
+  字體：SPEC 指定 Noto Serif TC（單字本身）與 Noto Sans TC（介面）。
+  這裡用系統的 serif / sans-serif family，在 Android 上分別對應到
+  Noto Serif CJK / Noto Sans CJK，字形正確、零 APK 成本、完全離線。
+  若要精確綁定 Noto Serif TC 本身，得內建 CJK 字型檔（單一字重就上看 10 MB）
+  或改用 Downloadable Fonts（首次取用需要網路，與第 2 節的離線原則衝突）。
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.Eanki" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/mint</item>
+        <item name="colorOnPrimary">@color/on_mint</item>
+        <item name="colorPrimaryContainer">@color/mint_card</item>
+        <item name="colorOnPrimaryContainer">@color/text_primary</item>
+
+        <item name="colorError">@color/brick</item>
+        <item name="colorOnError">@color/on_brick</item>
+        <item name="colorErrorContainer">@color/brick_card</item>
+        <item name="colorOnErrorContainer">@color/brick_text</item>
+
+        <item name="android:colorBackground">@color/ground</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceVariant">@color/surface2</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorOutline">@color/border</item>
+        <item name="colorOutlineVariant">@color/border_weak</item>
+
+        <item name="android:statusBarColor">@color/ground</item>
+        <item name="android:navigationBarColor">@color/nav_bar</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_muted</item>
+
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <!-- 單字本身用襯線，讓它看起來像字典條目而不是 UI 元件（SPEC 第 4 節） -->
+    <style name="TextAppearance.Eanki.Headword" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">@dimen/text_headword</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.Eanki.Display" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">@dimen/text_display</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.Eanki.Phonetic" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.Eanki.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.Eanki.Label" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">@dimen/text_label</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.Eanki.Caption" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">@dimen/text_caption</item>
+        <item name="android:textColor">@color/text_muted</item>
+    </style>
+
+    <!-- 卡片 -->
+    <style name="Widget.Eanki.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="strokeColor">@color/border</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardCornerRadius">@dimen/radius_m</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <!-- 主要動作：薄荷實心 -->
+    <style name="Widget.Eanki.Button" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/btn_primary_bg</item>
+        <item name="android:textColor">@color/btn_primary_text</item>
+        <item name="android:minHeight">@dimen/touch_min</item>
+        <item name="cornerRadius">@dimen/radius_s</item>
+    </style>
+
+    <!-- 次要動作：外框 -->
+    <style name="Widget.Eanki.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/btn_outlined_text</item>
+        <item name="strokeColor">@color/divider</item>
+        <item name="android:minHeight">@dimen/touch_min</item>
+        <item name="cornerRadius">@dimen/radius_s</item>
+    </style>
+
+    <!-- 第三順位動作：只有文字。排序鍵、全選鍵這種不該搶視線的操作。 -->
+    <style name="Widget.Eanki.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/mint</item>
+        <item name="android:minHeight">@dimen/touch_min</item>
+        <item name="cornerRadius">@dimen/radius_s</item>
+    </style>
+
+    <!-- chip 造型的小按鈕：來源照片這種「可以點開看看」的次要入口。 -->
+    <style name="Widget.Eanki.Chip.Button" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">@dimen/text_label</item>
+        <item name="android:minHeight">@dimen/touch_min</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="iconTint">@color/text_secondary</item>
+        <item name="strokeColor">@color/border</item>
+        <item name="cornerRadius">@dimen/radius_pill</item>
+    </style>
+
+    <style name="Widget.Eanki.TextField" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/mint</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="hintTextColor">@color/text_secondary</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_s</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_s</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_s</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_s</item>
+    </style>
+
+
+    <!-- 已選 chip。薄荷＝已選取，SPEC 第 4 節的色彩語意。 -->
+    <style name="Widget.Eanki.Chip" parent="Widget.Material3.Chip.Input">
+        <item name="chipBackgroundColor">@color/mint_card</item>
+        <item name="chipStrokeColor">@color/mint_card_border</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="closeIconTint">@color/mint</item>
+        <item name="chipMinHeight">@dimen/touch_min</item>
+    </style>
+
+    <!-- 熟悉度篩選的級別切換鍵。選中才上薄荷，未選維持中性。 -->
+    <style name="Widget.Eanki.Chip.Filter" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_filter_bg</item>
+        <item name="chipStrokeColor">@color/chip_filter_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/chip_filter_text</item>
+        <item name="chipMinHeight">@dimen/touch_min</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="chipIconVisible">false</item>
+    </style>
+</resources>

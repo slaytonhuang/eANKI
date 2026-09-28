@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 熟悉度的一列：色點 + 名稱 + 數量。點擊進入熟悉度篩選畫面。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/touch_min"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <View
+        android:id="@+id/levelDot"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@color/mint" />
+
+    <TextView
+        android:id="@+id/levelName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_m"
+        android:layout_weight="1"
+        android:textAppearance="@style/TextAppearance.Eanki.Body"
+        tools:text="記得" />
+
+    <TextView
+        android:id="@+id/levelCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/text_headword"
+        tools:text="48" />
+
+</LinearLayout>

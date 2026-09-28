@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 一組中英對照例句。英文在上、中文在下，靠左對齊（單字本身是置中的，例句不是）。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/spacing_s"
+    android:paddingBottom="@dimen/spacing_s">
+
+    <TextView
+        android:id="@+id/exampleEn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="1.3"
+        android:textAppearance="@style/TextAppearance.Eanki.Body"
+        android:textColor="@color/text_primary"
+        tools:text="We have to abandon the plan." />
+
+    <TextView
+        android:id="@+id/exampleZh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:lineSpacingMultiplier="1.3"
+        android:textAppearance="@style/TextAppearance.Eanki.Caption"
+        android:textColor="@color/text_secondary"
+        tools:text="我們必須放棄這個計劃。" />
+
+</LinearLayout>

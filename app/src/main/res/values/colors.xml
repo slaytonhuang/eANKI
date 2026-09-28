@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SPEC 第 4 節的色票，深色為唯一主題。
+  這裡只放原始色值，語意別名在 themes.xml 的 theme attribute。
+
+  色彩語意是固定的，不可混用：
+    薄荷 mint   = 主要動作、正向、已掌握
+    磚紅 brick  = 需要你處理（只給相機鍵、字典查不到的字、加強複習入口）
+    琥珀 amber  = 中間狀態（「有點難」）
+-->
+<resources>
+
+    <!-- 底層 -->
+    <color name="ground">#191816</color>
+    <color name="surface">#232220</color>
+    <color name="surface2">#2C2A27</color>
+    <color name="nav_bar">#1E1D1B</color>
+
+    <!-- 線 -->
+    <color name="border">#34322E</color>
+    <color name="border_weak">#2C2A27</color>
+    <color name="divider">#3A3833</color>
+
+    <!-- 字 -->
+    <color name="text_primary">#F2EEE4</color>
+    <color name="text_secondary">#A39C90</color>
+    <color name="text_muted">#8C8579</color>
+
+    <!-- 主色 薄荷 -->
+    <color name="mint">#7FBFA9</color>
+    <color name="mint_2">#6FB49D</color>
+    <color name="mint_dark">#4E8A76</color>
+    <color name="mint_card">#1E3B34</color>
+    <color name="mint_card_border">#2F5B50</color>
+    <color name="on_mint">#14231F</color>
+
+    <!-- 警示 磚紅 -->
+    <color name="brick">#D9714E</color>
+    <color name="on_brick">#1A0F0A</color>
+    <color name="brick_card">#2A1E19</color>
+    <color name="brick_card_border">#4A3226</color>
+    <color name="brick_outline">#C4613F</color>
+    <color name="brick_text">#E89477</color>
+
+    <!-- 琥珀 -->
+    <color name="amber">#D4A24C</color>
+    <color name="amber_outline">#A8823C</color>
+    <color name="amber_text">#DDB871</color>
+    <color name="amber_card">#282218</color>
+
+</resources>

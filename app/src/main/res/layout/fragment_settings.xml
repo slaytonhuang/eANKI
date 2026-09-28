@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  設定。SPEC 第 5 節：新字上限、複習上限、每日提醒開關、提醒時間、
+  沒有待複習就不提醒、語速、翻卡自動發音、離線字典狀態與更新。
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ground"
+    android:clipToPadding="false"
+    android:paddingStart="@dimen/gutter"
+    android:paddingEnd="@dimen/gutter"
+    android:paddingBottom="@dimen/spacing_xl"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/spacing_l"
+            android:paddingBottom="@dimen/spacing_l"
+            android:text="@string/tab_settings"
+            android:textAppearance="@style/TextAppearance.Eanki.Display" />
+
+        <!-- ========== 每日份量（SPEC 第 6.4 節）========== -->
+        <TextView
+            style="@style/TextAppearance.Eanki.Label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacing_s"
+            android:text="@string/settings_section_volume"
+            android:textColor="@color/mint" />
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Eanki.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_l">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/settings_new_per_day"
+                        android:textAppearance="@style/TextAppearance.Eanki.Body" />
+
+                    <TextView
+                        android:id="@+id/newPerDayValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="serif"
+                        android:textColor="@color/mint"
+                        android:textSize="@dimen/text_headword"
+                        tools:text="10" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_new_per_day_note"
+                    android:textAppearance="@style/TextAppearance.Eanki.Caption" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/newPerDaySlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stepSize="1"
+                    android:valueFrom="0"
+                    android:valueTo="50"
+                    app:labelBehavior="gone"
+                    app:thumbColor="@color/mint"
+                    app:trackColorActive="@color/mint"
+                    app:trackColorInactive="@color/border" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    android:background="@color/border" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/settings_reviews_per_day"
+                        android:textAppearance="@style/TextAppearance.Eanki.Body" />
+
+                    <TextView
+                        android:id="@+id/reviewsPerDayValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="serif"
+                        android:textColor="@color/mint"
+                        android:textSize="@dimen/text_headword"
+                        tools:text="60" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_reviews_per_day_note"
+                    android:textAppearance="@style/TextAppearance.Eanki.Caption" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/reviewsPerDaySlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stepSize="5"
+                    android:valueFrom="5"
+                    android:valueTo="200"
+                    app:labelBehavior="gone"
+                    app:thumbColor="@color/mint"
+                    app:trackColorActive="@color/mint"
+                    app:trackColorInactive="@color/border" />
+
+                <!-- 改了上限之後，今天實際會拿到幾張 -->
+                <TextView
+                    android:id="@+id/volumePreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:textAppearance="@style/TextAppearance.Eanki.Caption"
+                    android:textColor="@color/text_secondary"
+                    tools:text="以目前的設定，今天會有 23 張卡" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ========== 提醒（SPEC 第 6.7 節）========== -->
+        <TextView
+            style="@style/TextAppearance.Eanki.Label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/spacing_l"
+            android:paddingBottom="@dimen/spacing_s"
+            android:text="@string/settings_section_reminder"
+            android:textColor="@color/mint" />
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Eanki.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/spacing_l"
+                android:paddingTop="@dimen/spacing_s"
+                android:paddingEnd="@dimen/spacing_l"
+                android:paddingBottom="@dimen/spacing_s">
+
+                <include
+                    android:id="@+id/rowReminderEnabled"
+                    layout="@layout/view_setting_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/rowReminderTime"
+                    layout="@layout/view_setting_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/rowSkipEmpty"
+                    layout="@layout/view_setting_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:background="@color/border" />
+
+                <!--
+                  電池最佳化。Doze 會把 WorkManager 的工作往後推，
+                  提醒可能晚上一兩個小時才到。這不是程式能修的，
+                  只能把使用者帶到系統設定，所以要說清楚。
+                -->
+                <include
+                    android:id="@+id/rowBattery"
+                    layout="@layout/view_setting_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/rowNotificationPermission"
+                    layout="@layout/view_setting_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ========== 發音 ========== -->
+        <TextView
+            style="@style/TextAppearance.Eanki.Label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/spacing_l"
+            android:paddingBottom="@dimen/spacing_s"
+            android:text="@string/settings_section_speech"
+            android:textColor="@color/mint" />
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Eanki.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/spacing_l"
+                android:paddingTop="@dimen/spacing_l"
+                android:paddingEnd="@dimen/spacing_l"
+                android:paddingBottom="@dimen/spacing_s">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/settings_speech_rate"
+                        android:textAppearance="@style/TextAppearance.Eanki.Body" />
+
+                    <TextView
+                        android:id="@+id/speechRateValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="serif"
+                        android:textColor="@color/mint"
+                        android:textSize="@dimen/text_headword"
+                        tools:text="1.0×" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPreviewSpeech"
+                        style="@style/Widget.Eanki.Button.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_s"
+                        android:minWidth="0dp"
+                        android:text="@string/settings_speech_preview" />
+
+                </LinearLayout>
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/speechRateSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stepSize="0.1"
+                    android:valueFrom="0.5"
+                    android:valueTo="1.5"
+                    app:labelBehavior="gone"
+                    app:thumbColor="@color/mint"
+                    app:trackColorActive="@color/mint"
+                    app:trackColorInactive="@color/border" />
+
+                <include
+                    android:id="@+id/rowAutoSpeak"
+                    layout="@layout/view_setting_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ========== 資料備份 ========== -->
+        <TextView
+            style="@style/TextAppearance.Eanki.Label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/spacing_l"
+            android:paddingBottom="@dimen/spacing_s"
+            android:text="@string/settings_section_backup"
+            android:textColor="@color/mint" />
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Eanki.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_l">
+
+                <TextView
+                    android:id="@+id/backupStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Eanki.Body"
+                    tools:text="上次備份：2026-09-24 13:40" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:text="@string/settings_backup_note"
+                    android:textAppearance="@style/TextAppearance.Eanki.Caption" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnExport"
+                        style="@style/Widget.Eanki.Button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/settings_backup_export" />
+
+                    <Space
+                        android:layout_width="@dimen/spacing_s"
+                        android:layout_height="1dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnRestore"
+                        style="@style/Widget.Eanki.Button.Outlined"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/settings_backup_restore" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ========== 離線字典 ========== -->
+        <TextView
+            style="@style/TextAppearance.Eanki.Label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/spacing_l"
+            android:paddingBottom="@dimen/spacing_s"
+            android:text="@string/settings_section_dictionary"
+            android:textColor="@color/mint" />
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Eanki.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_l">
+
+                <TextView
+                    android:id="@+id/dictStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Eanki.Body"
+                    tools:text="已就緒" />
+
+                <TextView
+                    android:id="@+id/dictDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:textAppearance="@style/TextAppearance.Eanki.Caption"
+                    tools:text="49,500 個詞條 · 43,215 個詞形 · 11.6 MB" />
+
+                <!-- SPEC 第 3 節定案「內建精簡版，不做下載」，所以沒有下載更新 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:text="@string/settings_dict_note"
+                    android:textAppearance="@style/TextAppearance.Eanki.Caption" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRebuildDict"
+                    style="@style/Widget.Eanki.Button.Outlined"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:text="@string/settings_dict_rebuild" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>

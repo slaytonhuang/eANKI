@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  今日頁。SPEC 第 5 節：
+  過去七天熱力圖、待複習數量大字、今日放行新字數、方向切換、開始複習、最近加入三筆。
+
+  空狀態（第一次啟動、單字本還是空的）是同一份版面裡的另一組 View，
+  SPEC 明講「不顯示空的熱力圖」，所以空狀態時整塊熱力圖不出現。
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ground">
+
+    <ScrollView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/gutter"
+        android:paddingEnd="@dimen/gutter"
+        android:paddingBottom="@dimen/spacing_xl">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/spacing_l"
+                android:paddingBottom="@dimen/spacing_l">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/today_title"
+                    android:textAppearance="@style/TextAppearance.Eanki.Display" />
+
+                <!-- 方向切換鍵。SPEC 第 6.2 節：放複習流程裡而非設定頁。 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDirection"
+                    style="@style/Widget.Eanki.Button.Outlined"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="0dp"
+                    android:paddingStart="@dimen/spacing_m"
+                    android:paddingEnd="@dimen/spacing_m"
+                    android:textSize="@dimen/text_label"
+                    app:icon="@drawable/ic_swap"
+                    app:iconSize="16dp"
+                    tools:text="英 → 中" />
+
+            </LinearLayout>
+
+            <!-- 過去七天熱力圖（SPEC 第 6.7 節：滾動七天，不是日曆週） -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/heatCard"
+                style="@style/Widget.Eanki.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_m">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/today_heatmap_title"
+                        android:textAppearance="@style/TextAppearance.Eanki.Label" />
+
+                    <LinearLayout
+                        android:id="@+id/heatRow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_m"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal" />
+
+                    <TextView
+                        android:id="@+id/heatEmptyNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_s"
+                        android:text="@string/today_heatmap_empty"
+                        android:textAppearance="@style/TextAppearance.Eanki.Caption"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 待複習數量大字 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/dueCard"
+                style="@style/Widget.Eanki.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_m">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_l">
+
+                    <TextView
+                        android:id="@+id/dueLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/today_due_label"
+                        android:textAppearance="@style/TextAppearance.Eanki.Label" />
+
+                    <TextView
+                        android:id="@+id/dueCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="serif"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/text_primary"
+                        android:textSize="@dimen/today_big_number"
+                        tools:text="23" />
+
+                    <TextView
+                        android:id="@+id/newCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:textAppearance="@style/TextAppearance.Eanki.Caption"
+                        tools:text="今日可放行新字 10" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnStartReview"
+                        style="@style/Widget.Eanki.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_m"
+                        android:text="@string/review_start" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 最近加入三筆 -->
+            <TextView
+                android:id="@+id/recentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_l"
+                android:layout_marginBottom="@dimen/spacing_s"
+                android:text="@string/today_recent_title"
+                android:textAppearance="@style/TextAppearance.Eanki.Label" />
+
+            <LinearLayout
+                android:id="@+id/recentList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!--
+      空狀態。SPEC 第 5 節：插圖、「單字本還是空的」、掃描第一個單字（主）、
+      手動輸入（次）、「離線字典已就緒」提示，而且明講不顯示空的熱力圖。
+    -->
+    <LinearLayout
+        android:id="@+id/emptyState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/gutter"
+        android:paddingEnd="@dimen/gutter"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:alpha="0.5"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_book" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_m"
+            android:text="@string/empty_title"
+            android:textAppearance="@style/TextAppearance.Eanki.Headword" />
+
+        <!-- 主要動作是掃描（SPEC 第 5 節空狀態），Phase 3 前先接佔位畫面 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEmptyScan"
+            style="@style/Widget.Eanki.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_l"
+            android:text="@string/empty_scan_first" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEmptyManual"
+            style="@style/Widget.Eanki.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_s"
+            android:text="@string/wordlist_add" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEmptyPhoto"
+            style="@style/Widget.Eanki.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_s"
+            android:text="@string/empty_pick_photo" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEmptyImport"
+            style="@style/Widget.Eanki.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_s"
+            android:text="@string/empty_import_csv" />
+
+        <TextView
+            android:id="@+id/dictStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_l"
+            android:text="@string/empty_dict_loading"
+            android:textAppearance="@style/TextAppearance.Eanki.Caption" />
+
+    </LinearLayout>
+
+</FrameLayout>

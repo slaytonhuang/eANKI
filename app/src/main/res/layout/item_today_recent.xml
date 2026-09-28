@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 今日頁「最近加入」的一列。比單字本的列簡化，只有字與釋義。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/surface"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/spacing_m"
+    android:paddingTop="@dimen/spacing_s"
+    android:paddingEnd="@dimen/spacing_m"
+    android:paddingBottom="@dimen/spacing_s">
+
+    <TextView
+        android:id="@+id/recentHeadword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/text_body"
+        tools:text="vocabulary" />
+
+    <TextView
+        android:id="@+id/recentTranslation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.Eanki.Caption"
+        tools:text="n. 詞彙, 詞彙表" />
+
+</LinearLayout>

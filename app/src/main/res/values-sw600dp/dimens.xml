@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  >= 600dp 的展開版（Fold 5 內螢幕約 690dp、平板）。
+  SPEC 第 7 節：內螢幕接近正方形，直接拉寬會變成文字橫跨 690dp。
+  Phase 1 還沒有雙欄，先用最大寬度把內容收住，避免一行字橫跨整個螢幕。
+-->
+<resources>
+    <dimen name="gutter">32dp</dimen>
+    <dimen name="content_max_width">560dp</dimen>
+
+    <!-- SPEC 第 6.3 節：半開/展開模式下整排放大為 66/80/94/108 -->
+    <dimen name="grade_h1">66dp</dimen>
+    <dimen name="grade_h2">80dp</dimen>
+    <dimen name="grade_h3">94dp</dimen>
+    <dimen name="grade_h4">108dp</dimen>
+    <dimen name="grade_text_padding">14dp</dimen>
+
+    <dimen name="text_card_headword">64sp</dimen>
+
+    <dimen name="text_display">36sp</dimen>
+    <dimen name="text_headword">26sp</dimen>
+</resources>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  熟悉度。SPEC 第 5 節：四級堆疊條、四列數量、「不太熟的字 N 個」磚紅卡片。
+
+  「尚未開始」刻意<b>不放進堆疊條</b>：四級是由評分定義的，沒評過分的字
+  塞進任何一級都是錯的；而且新字每天只放行 10 個，未複習的池子會維持
+  好幾個月的絕對多數，放進去會讓四級的比例完全讀不出來。
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ground"
+    android:clipToPadding="false"
+    android:paddingStart="@dimen/gutter"
+    android:paddingEnd="@dimen/gutter"
+    android:paddingBottom="@dimen/spacing_xl">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/spacing_l"
+            android:paddingBottom="@dimen/spacing_l"
+            android:text="@string/tab_familiarity"
+            android:textAppearance="@style/TextAppearance.Eanki.Display" />
+
+        <!-- 空狀態：一個字都還沒評過分 -->
+        <TextView
+            android:id="@+id/emptyNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacing_l"
+            android:text="@string/familiarity_empty"
+            android:textAppearance="@style/TextAppearance.Eanki.Label"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Eanki.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_l">
+
+                <TextView
+                    android:id="@+id/gradedSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Eanki.Label"
+                    tools:text="已評分 126 個字" />
+
+                <!-- 四級堆疊條。四段寬度用 layout_weight 依比例設定。 -->
+                <LinearLayout
+                    android:id="@+id/stackBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="14dp"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/barForgot"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/brick_outline" />
+
+                    <Space
+                        android:id="@+id/gapForgotHard"
+                        android:layout_width="@dimen/stack_bar_gap"
+                        android:layout_height="match_parent" />
+
+                    <View
+                        android:id="@+id/barHard"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/amber" />
+
+                    <Space
+                        android:id="@+id/gapHardGood"
+                        android:layout_width="@dimen/stack_bar_gap"
+                        android:layout_height="match_parent" />
+
+                    <View
+                        android:id="@+id/barGood"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/mint_2" />
+
+                    <Space
+                        android:id="@+id/gapGoodEasy"
+                        android:layout_width="@dimen/stack_bar_gap"
+                        android:layout_height="match_parent" />
+
+                    <View
+                        android:id="@+id/barEasy"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/mint" />
+
+                </LinearLayout>
+
+                <include
+                    android:id="@+id/rowForgot"
+                    layout="@layout/item_familiarity_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m" />
+
+                <include
+                    android:id="@+id/rowHard"
+                    layout="@layout/item_familiarity_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/rowGood"
+                    layout="@layout/item_familiarity_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/rowEasy"
+                    layout="@layout/item_familiarity_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:background="@color/border" />
+
+                <!--
+                  尚未開始。獨立一行、灰色，刻意不用薄荷／磚紅／琥珀 ——
+                  SPEC 第 4 節說那三個顏色語意固定，而「還沒開始」不屬於任何一個。
+                -->
+                <include
+                    android:id="@+id/rowNotStarted"
+                    layout="@layout/item_familiarity_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 不太熟的字（忘了 + 有點難）。SPEC 第 5 節指定磚紅卡片。 -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/strugglingCard"
+            style="@style/Widget.Eanki.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_m"
+            app:cardBackgroundColor="@color/brick_card"
+            app:strokeColor="@color/brick_card_border">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_l">
+
+                <TextView
+                    android:id="@+id/strugglingTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Eanki.Headword"
+                    android:textColor="@color/brick_text"
+                    tools:text="不太熟的字 53 個" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:text="@string/familiarity_struggling_note"
+                    android:textAppearance="@style/TextAppearance.Eanki.Caption" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPracticeAll"
+                        style="@style/Widget.Eanki.Button.Outlined"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/familiarity_practice_all" />
+
+                    <Space
+                        android:layout_width="@dimen/spacing_s"
+                        android:layout_height="1dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPracticeTwenty"
+                        style="@style/Widget.Eanki.Button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/familiarity_practice_20" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>

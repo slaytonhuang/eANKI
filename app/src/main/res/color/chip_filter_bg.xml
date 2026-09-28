@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 級別切換鍵：選中＝薄荷卡片底，未選＝一般表面。SPEC 第 4 節薄荷＝目前作用中。 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/mint_card" android:state_checked="true" />
+    <item android:color="@color/surface" />
+</selector>

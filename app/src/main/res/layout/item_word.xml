@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  單字本的一列。SPEC 第 5 節的完整版還有「熟悉度色點」與「下次複習」，
+  兩者都要 review_state 才有值，等 Phase 2。
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/surface"
+    android:paddingStart="@dimen/spacing_m"
+    android:paddingTop="@dimen/spacing_m"
+    android:paddingEnd="@dimen/spacing_s"
+    android:paddingBottom="@dimen/spacing_m">
+
+    <!--
+      熟悉度色點（SPEC 第 5 節）。色票走 LevelPalette，全 App 同一份。
+      還沒評過分的字用中性灰 —— 四級是由評分定義的，沒評過分不屬於任何一級。
+    -->
+    <View
+        android:id="@+id/familiarityDot"
+        android:layout_width="@dimen/grade_dot"
+        android:layout_height="@dimen/grade_dot"
+        android:layout_marginEnd="@dimen/spacing_s"
+        android:background="@drawable/dot_grade"
+        app:layout_constraintBottom_toBottomOf="@id/headword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/headword" />
+
+    <TextView
+        android:id="@+id/headword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.Eanki.Headword"
+        app:layout_constraintEnd_toStartOf="@id/btnSpeak"
+        app:layout_constraintStart_toEndOf="@id/familiarityDot"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="apple" />
+
+    <TextView
+        android:id="@+id/phonetic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textAppearance="@style/TextAppearance.Eanki.Phonetic"
+        app:layout_constraintEnd_toStartOf="@id/btnSpeak"
+        app:layout_constraintStart_toStartOf="@id/headword"
+        app:layout_constraintTop_toBottomOf="@id/headword"
+        tools:text="/'æpl/" />
+
+    <TextView
+        android:id="@+id/translation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_s"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textAppearance="@style/TextAppearance.Eanki.Body"
+        app:layout_constraintEnd_toStartOf="@id/btnSpeak"
+        app:layout_constraintStart_toStartOf="@id/headword"
+        app:layout_constraintTop_toBottomOf="@id/phonetic"
+        tools:text="n. 蘋果, 蘋果樹" />
+
+    <!-- 下次複習（SPEC 第 5 節）。文字由 DueLabel 決定語意。 -->
+    <TextView
+        android:id="@+id/nextReview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:textAppearance="@style/TextAppearance.Eanki.Caption"
+        app:layout_constraintEnd_toStartOf="@id/btnSpeak"
+        app:layout_constraintStart_toStartOf="@id/headword"
+        app:layout_constraintTop_toBottomOf="@id/translation"
+        tools:text="4 天後" />
+
+    <!-- 最小觸控目標 48dp（SPEC 第 4 節） -->
+    <ImageButton
+        android:id="@+id/btnSpeak"
+        android:layout_width="@dimen/touch_min"
+        android:layout_height="@dimen/touch_min"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/action_speak"
+        android:src="@drawable/ic_volume"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnDelete"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="@dimen/touch_min"
+        android:layout_height="@dimen/touch_min"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/action_delete"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

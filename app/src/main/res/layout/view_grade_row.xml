@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  四顆階梯評分鍵（SPEC 第 6.3 節）。複習與加強複習共用同一排，
+  兩邊的評分手感必須一模一樣 —— 複製一份出來遲早會走鐘。
+
+  不是四個一樣的方塊：高度 54/64/74/84、權重 1/1.1/1.22/1.35、
+  圓角 9/13/18/24、填色由只有外框漸進到實心最亮。
+  四顆底部對齊，上緣形成階梯線；文字一律貼底，四顆基線齊平。
+
+  按鈕下方的預估間隔只有複習畫面會用。加強複習不動排程，
+  顯示「4 天」會是謊話，所以 ExtraPracticeActivity 把那四個 TextView 收掉。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:gravity="bottom"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/btnForgot"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grade_h1"
+            android:background="@drawable/grade_forgot"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="bottom|center_horizontal"
+            android:paddingBottom="@dimen/grade_text_padding"
+            android:text="@string/grade_forgot"
+            android:textColor="@color/brick_text"
+            android:textSize="@dimen/text_label" />
+
+        <TextView
+            android:id="@+id/intervalForgot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.Eanki.Caption"
+            tools:text="10 分鐘" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="@dimen/spacing_s"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/btnHard"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grade_h2"
+            android:background="@drawable/grade_hard"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="bottom|center_horizontal"
+            android:paddingBottom="@dimen/grade_text_padding"
+            android:text="@string/grade_hard"
+            android:textColor="@color/amber_text"
+            android:textSize="@dimen/text_label" />
+
+        <TextView
+            android:id="@+id/intervalHard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.Eanki.Caption"
+            tools:text="1 天" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="@dimen/spacing_s"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.22"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/btnGood"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grade_h3"
+            android:background="@drawable/grade_good"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="bottom|center_horizontal"
+            android:paddingBottom="@dimen/grade_text_padding"
+            android:text="@string/grade_good"
+            android:textColor="@color/on_mint"
+            android:textSize="@dimen/text_label"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/intervalGood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.Eanki.Caption"
+            tools:text="4 天" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="@dimen/spacing_s"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.35"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/btnEasy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grade_h4"
+            android:background="@drawable/grade_easy"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="bottom|center_horizontal"
+            android:paddingBottom="@dimen/grade_text_padding"
+            android:text="@string/grade_easy"
+            android:textColor="@color/on_mint"
+            android:textSize="@dimen/text_label"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/intervalEasy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.Eanki.Caption"
+            tools:text="10 天" />
+    </LinearLayout>
+
+</LinearLayout>

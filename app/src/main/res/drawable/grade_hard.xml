@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 有點難：外框 + 微填底，圓角 13dp -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <corners android:radius="13dp" />
+    <stroke android:width="1.5dp" android:color="@color/amber_outline" />
+    <solid android:color="@color/amber_card" />
+</shape>

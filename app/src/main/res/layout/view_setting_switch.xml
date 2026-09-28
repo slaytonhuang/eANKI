@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 設定的一列（開關）。整列可點，不必準確戳到開關本身。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/touch_min"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/spacing_s"
+    android:paddingBottom="@dimen/spacing_s">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/switchTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Eanki.Body"
+            tools:text="每日提醒" />
+
+        <TextView
+            android:id="@+id/switchSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textAppearance="@style/TextAppearance.Eanki.Caption"
+            android:visibility="gone"
+            tools:text="到時間提醒你今天要複習幾個字"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <!-- clickable=false：整列才是觸控目標，避免只有開關那一小塊能按 -->
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/switchToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_m"
+        android:clickable="false"
+        android:focusable="false" />
+
+</LinearLayout>
